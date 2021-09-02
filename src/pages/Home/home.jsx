@@ -35,10 +35,10 @@ function HomePage() {
   const [error, setError] = useState('');
 
   const shouldItemRender = (item, value) => {
-    if (selectedSymptoms.includes(item)) {
+    if (selectedSymptoms.includes(item.label)) {
       return false
     }
-    const formattedItem = formatItem(item.label).toLowerCase();
+    const formattedItem = item.label.toLowerCase();
     return formattedItem.includes(value.toLowerCase())
   };
 
