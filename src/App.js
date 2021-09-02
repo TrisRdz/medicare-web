@@ -1,11 +1,11 @@
 import './App.css';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-import HomePage from './pages/Home/home';
+import HomePage from './pages/home/home';
 import Header from './layout/header'
 
 function App() {
   return (
-    <div style={{ overflowX: 'hidden' }}>
+    <div>
       <Header />
       <div style={{ paddingInline: 100 }}>
         <Router>

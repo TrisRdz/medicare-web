@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import Autocomplete from 'react-autocomplete';
+
 import { BASE_URL } from '../../constants';
 import { symptoms } from '../../constants/symptoms';
 
@@ -7,8 +8,6 @@ const removeEmpty = (selectedSymptoms) => {
   const validSymptoms = selectedSymptoms.filter((symptom) => symptom !== '');
   return validSymptoms;
 }
-
-const formatItem = (item) => item.replaceAll('_', ' ');
 
 function HomePage() {
   const fetchPrediction = async () => {
