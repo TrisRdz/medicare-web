@@ -9,6 +9,10 @@
   box-shadow: 0px 1px 2px grey;
 }
 
+.primaryButton:disabled {
+  background-color: grey;
+}
+
 .secondaryButton {
   background-color: white;
   border: 1px solid grey;
@@ -22,4 +26,9 @@
 
 button {
   cursor: pointer;
+}
+
+.errorMessage {
+  color: tomato;
+  font-size: 13px;
 }
