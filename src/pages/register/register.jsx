@@ -4,6 +4,7 @@ import { useHistory } from "react-router";
 import { validateEmail } from "../../utils/validations";
 import DefaultInput from "../../components/input/input";
 import apiCall from "../../utils/api";
+import '../../App.css'
 
 const RegisterPage = () => {
 
@@ -41,7 +42,7 @@ const RegisterPage = () => {
     }, [email, password, confirmPassword, name])
 
     return (
-        <div>
+        <div className='authContainer'>
             <DefaultInput 
                 value={name}
                 placeholder='Enter full name'
@@ -71,6 +72,9 @@ const RegisterPage = () => {
            {Boolean(confirmPassword.length && confirmPassword !== password) && <p className='errorMessage'>
                 Passwords do not match
             </p>}
+            <div style={{ margin: '20px 0', fontSize: 14 }}>
+                <a href='/login' >Existing user? Login here</a>
+           </div>
            <button className='primaryButton' style={{ marginTop: 20 }} onClick={registerUser} disabled={!isValidInput}>
                Register
            </button>

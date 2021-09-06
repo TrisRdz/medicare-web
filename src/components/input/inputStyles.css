@@ -1,7 +1,19 @@
+.inputContainer {
+    display: flex;
+    flex-direction: column;
+    margin: 20px 0;
+}
+
+.inputContainer:first-child {
+    margin-top: 0px;
+}
+
 .inputBox {
     padding: 10px;
     border-radius: 4px;
     border: 1px solid grey;
+    width: auto;
+    color: #374151;
 }
 
 .inputBox:focus, .inputBox:focus-visible {
@@ -10,4 +22,6 @@
 
 .inputLabel {
     font-weight: 600;
+    margin-bottom: 13px;
+    color: #6B7280;
 }

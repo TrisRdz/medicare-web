@@ -24,7 +24,10 @@ function HomePage() {
       data: { percieved_symptoms: formattedSymptoms },
       url: 'check_disease'
     })
-    setPrediction(response.data.result);
+    const result = response.data && response.data.result;
+    if (result) {
+      setPrediction(response.data.result);
+    }
   }
 
   const [selectedSymptoms, setSelectedSymptoms] = useState(Array(5).fill(defaultSelectedSymptom));

@@ -1,6 +1,7 @@
 import { useState } from "react"
 
 import DefaultInput from "../../components/input/input"
+import '../../App.css'
 
 const LoginPage = () => {
 
@@ -8,7 +9,7 @@ const LoginPage = () => {
     const [password, setPassword] = useState('');
 
     return (
-        <div>
+        <div className='authContainer'>
            <DefaultInput 
                 value={email}
                 placeholder='Enter email'
@@ -21,7 +22,10 @@ const LoginPage = () => {
                 label='Password'
                 onChange={(event) => setPassword(event.target.value)}
            />
-           <button className='primaryButton' style={{ marginTop: 20 }}>
+           <div style={{ margin: '20px 0', fontSize: 14 }}>
+                <a href='/register' >New user? Register here</a>
+           </div>
+           <button className='primaryButton'>
                Login
            </button>
         </div>

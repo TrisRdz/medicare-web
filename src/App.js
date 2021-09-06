@@ -9,9 +9,9 @@ import RegisterPage from './pages/register/register';
 
 function App() {
   return (
-    <div>
+    <div className='appContainer'>
       <Header />
-      <div style={{ paddingInline: 100 }}>
+      <div style={{ padding: 100 }}>
         <Router>
           <Switch>
             <Route exact path='/' component={HomePage} />

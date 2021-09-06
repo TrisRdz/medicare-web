@@ -1,8 +1,8 @@
 import './inputStyles.css';
 
 const DefaultInput = ({ label, placeholder, onChange, value, type = 'text' }) => (
-   <div>
-       {!!label && <p className='inputLabel'>{label}</p>}
+   <div className='inputContainer'>
+       {!!label && <span className='inputLabel'>{label}</span>}
         <input 
             placeholder={placeholder}
             value={value}

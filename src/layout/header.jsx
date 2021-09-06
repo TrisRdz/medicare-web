@@ -1,7 +1,7 @@
 import './header.css';
 
 const Header = () => (
-    <div className='headerContainer'>MEDICARE</div>
+    <header className='headerContainer'>Medicare</header>
 )
 
 export default Header;
