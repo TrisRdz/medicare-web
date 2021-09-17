@@ -6,12 +6,14 @@ const defaultHeaders = {
 }
 
 const apiCall = async (params) => {
+    const authToken = localStorage.getItem('authToken');
     try {
-        const { headers = {}, url, method, data  } = params;
+        const { headers = {}, url, method, data, withAuth  } = params;
         const response = await axios({
             headers: {
                 ...defaultHeaders,
-                ...headers
+                ...headers,
+                ...(withAuth ? { 'Authorization': `Bearer ${authToken}` }: {})
             },
             method,
             baseURL: BASE_URL,
@@ -20,6 +22,9 @@ const apiCall = async (params) => {
         });
         return response;
     } catch (error) {
+        if (error.message === 'Request failed with status code 401') {
+            localStorage.setItem('authToken', null);
+        }
         return error;
     }
 }

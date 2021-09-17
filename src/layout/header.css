@@ -5,8 +5,40 @@
     z-index: 10;
     box-shadow: -1px 1px 10px 1px grey;
     position: sticky;
-    width: 100vw;
+    width: 90vw;
     font-weight: 600;
     color: white;
     background-color: var(--primaryBlue);
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.loginButton {
+    background-color: white;
+    color: var(--primaryBlue);
+    padding: 10px 20px;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.userImage {
+    height: 40px;
+    width: 40px;
+    border-radius: 30px;
+    overflow: hidden;
+}
+
+.userImage:hover {
+    cursor: pointer;
+}
+
+.headerText {
+    font-size: 40px;
+    margin: 0;
+}
+
+.headerText:hover {
+    cursor: pointer;
 }

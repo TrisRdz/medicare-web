@@ -6,6 +6,8 @@ import apiCall from '../../utils/api';
 
 import '../../components/input/inputStyles.css';
 import './homeStyles.css';
+import userAtom from '../../store/userAtom';
+import { useRecoilValue } from 'recoil';
 
 
 const removeEmpty = (selectedSymptoms) => {
@@ -21,18 +23,38 @@ function HomePage() {
     const formattedSymptoms = validSymptoms.map((validSymptom) => symptoms.find((symptom) => symptom.label === validSymptom.value).value);
     const response = await apiCall({
       method: 'POST',
-      data: { percieved_symptoms: formattedSymptoms },
+      data: { perceived_symptoms: formattedSymptoms },
       url: 'check_disease'
     })
-    const result = response.data && response.data.result;
+    console.log(response);
+    const result = response.data;
     if (result) {
-      setPrediction(response.data.result);
+      setPrediction(result);
     }
   }
 
   const [selectedSymptoms, setSelectedSymptoms] = useState(Array(5).fill(defaultSelectedSymptom));
-  const [prediction, setPrediction] = useState('');
+  const [prediction, setPrediction] = useState(null);
   const [error, setError] = useState('');
+  const { authToken } = useRecoilValue(userAtom);
+
+  const { perceived_symptoms, required_doctor, predicted_disease } = prediction || {};
+  console.log(authToken);
+
+  const setAppointment = async () => {
+    console.log('test');
+    const response = await apiCall({
+      method: 'PUT',
+      data: {
+        perceived_symptoms,
+        required_doctor,
+        predicted_disease
+      },
+      url: 'user/appointment',
+      withAuth: true
+    })
+    console.log(response);
+  }
 
   const shouldItemRender = (item, value) => {
     if (selectedSymptoms.findIndex((symptom) => symptom.value === item.label) !== -1) {
@@ -63,8 +85,6 @@ function HomePage() {
   }
 
   const isInvalidInput = checkIsInvalidInput();
-
-  console.log(selectedSymptoms);
 
   return (
     <div>
@@ -113,8 +133,9 @@ function HomePage() {
         ADD +
       </button>}
       <button onClick={fetchPrediction} className='primaryButton' disabled={isInvalidInput}>Submit</button>
-      {!!prediction && <p>
-        You might be having: <span style={{ fontWeight: 'bold', textTransform: 'capitalize' }}>{prediction}</span>
+      {!!predicted_disease && <p>
+        You might be having: <span style={{ fontWeight: 'bold', textTransform: 'capitalize' }}>{predicted_disease}</span>
+        {authToken && required_doctor && <p>Would you like to setup an appointment with a doctor, if yes please click <span className='textButton' onClick={setAppointment}>here</span>.</p>}
       </p>}
     </div>
   );

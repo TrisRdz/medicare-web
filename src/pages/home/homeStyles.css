@@ -6,3 +6,11 @@
 .autoCompleteItem:last-child {
     border-bottom: none;
 }
+
+.textButton {
+    color: blue;
+}
+
+.textButton:hover {
+    cursor: pointer;
+}

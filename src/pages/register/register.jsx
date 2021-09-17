@@ -27,7 +27,7 @@ const RegisterPage = () => {
         }
         const response = await apiCall(params);
         if (response.data) {
-            history.replace('/');
+            history.replace('/login', { fromSignupFlow: true });
         }
     }
 
