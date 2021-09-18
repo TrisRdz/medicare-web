@@ -18,7 +18,7 @@ const RegisterPage = () => {
         const params = {
             method: 'POST',
             data: {
-                is_active: true,
+                id: "0",
                 name,
                 email,
                 password
@@ -26,7 +26,7 @@ const RegisterPage = () => {
             url: 'signup'
         }
         const response = await apiCall(params);
-        if (response.data) {
+        if (response.status === 200) {
             history.replace('/login', { fromSignupFlow: true });
         }
     }
