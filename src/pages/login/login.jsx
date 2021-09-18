@@ -49,7 +49,7 @@ const LoginPage = () => {
                 authToken
             });
             localStorage.setItem('authToken', authToken);
-            history.replace('/');
+            history.replace('/profile');
         }
     }
 
