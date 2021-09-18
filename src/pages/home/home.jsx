@@ -26,7 +26,6 @@ function HomePage() {
       data: { perceived_symptoms: formattedSymptoms },
       url: 'check_disease'
     })
-    console.log(response);
     const result = response.data;
     if (result) {
       setPrediction(result);
@@ -39,10 +38,8 @@ function HomePage() {
   const { authToken } = useRecoilValue(userAtom);
 
   const { perceived_symptoms, required_doctor, predicted_disease } = prediction || {};
-  console.log(authToken);
 
   const setAppointment = async () => {
-    console.log('test');
     const response = await apiCall({
       method: 'PUT',
       data: {
@@ -53,7 +50,6 @@ function HomePage() {
       url: 'user/appointment',
       withAuth: true
     })
-    console.log(response);
   }
 
   const shouldItemRender = (item, value) => {
@@ -70,6 +66,7 @@ function HomePage() {
 
   const onValueChanged = (value, index, isValid) => {
     setError('');
+    setPrediction(null);
     setSelectedSymptoms(currentSelected => {
       const selectedCopy = [...currentSelected];
       selectedCopy[index] = { value, isValid };

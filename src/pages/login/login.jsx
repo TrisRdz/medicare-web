@@ -1,4 +1,4 @@
-import { useState, useMemo } from "react"
+import { useState, useMemo, useEffect } from "react"
 
 import { useLocation, useHistory } from "react-router-dom";
 import DefaultInput from "../../components/input/input";
@@ -12,8 +12,13 @@ const LoginPage = () => {
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [error, setError] = useState('');
     const setUserAtom = useSetRecoilState(userAtom);
     const history = useHistory();
+
+    useEffect(() => {
+        setError('');
+    }, [email, password])
 
     const { state } = useLocation();
     const isValidInput = useMemo(() => {
@@ -35,6 +40,9 @@ const LoginPage = () => {
             data: formData,
             url: 'token'
         });
+        if (response.status === 401) {
+            setError(response.data.detail);
+        }
         const authToken = response && response.data && response.data.access_token;
         if (authToken) {
             setUserAtom({
@@ -72,6 +80,7 @@ const LoginPage = () => {
                     label='Password'
                     onChange={(event) => setPassword(event.target.value)}
                 />
+                {Boolean(error) && <p className='errorMessage'>{error}</p>}
                 <div style={{ margin: '20px 0', fontSize: 14 }}>
                     <a href='/register' >New user? Register here</a>
                 </div>

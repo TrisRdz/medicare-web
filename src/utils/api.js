@@ -22,10 +22,10 @@ const apiCall = async (params) => {
         });
         return response;
     } catch (error) {
-        if (error.message === 'Request failed with status code 401') {
-            localStorage.setItem('authToken', null);
+        if (error.status === 401) {
+            localStorage.removeItem('authToken', null);
         }
-        return error;
+        return error.response;
     }
 }
 

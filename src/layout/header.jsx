@@ -1,21 +1,49 @@
 import { useHistory } from 'react-router-dom';
-import { useRecoilValue } from 'recoil';
-import userAtom from '../store/userAtom';
 import './header.css';
 
-import UserPlaceholder from '../assets/userPlaceholder.png';
+import { useEffect } from 'react';
+import { useUserData } from '../store/useUserData';
 
 const Header = () => {
 
     const history = useHistory();
-    const { authToken } = useRecoilValue(userAtom);
+    const { userData, updateUserData, setUserData } = useUserData();
+    const { authToken } = userData || {};
+
+    const isLoggedIn = Boolean(authToken);
+
+    useEffect(() => {
+        if (isLoggedIn) {
+            updateUserData();
+        }
+    }, [authToken]);
+
+    const signOut = () => {
+        setUserData({
+            authToken: null,
+            user: null
+        })
+        localStorage.removeItem('authToken');
+        history.replace('/');
+    }
+
+    console.log(authToken, 'sadhksahdhaskdhashdashhd');
 
     return (
         <header className='headerContainer'>
             <h1 className='headerText' onClick={() => history.push('/')}>Medicare</h1>
             <div>
-                {authToken ?<img src={UserPlaceholder} alt='userImage' className='userImage' onClick={() => history.push('/profile')} /> :
-                    <button className='loginButton' onClick={() => history.push('/login')}>Login</button>}
+                {isLoggedIn ?
+                    <div>
+                        <button className='headerButton' onClick={() => history.push('/profile')}>
+                            Appointments
+                        </button>
+                        <button className='headerButton' onClick={signOut}>
+                            Sign Out
+                        </button>
+                    </div>
+                    :
+                    <button className='headerButton' onClick={() => history.push('/login')}>Sign In</button>}
             </div>
         </header>
     )

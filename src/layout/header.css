@@ -15,12 +15,15 @@
     align-items: center;
 }
 
-.loginButton {
+.headerButton {
     background-color: white;
     color: var(--primaryBlue);
     padding: 10px 20px;
     font-weight: bold;
     text-transform: uppercase;
+    margin-right: 10px;
+    border: none;
+    box-shadow: none;
 }
 
 .userImage {

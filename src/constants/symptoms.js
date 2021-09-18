@@ -44,7 +44,6 @@ export const symptoms = [
 {"label":"Yellow Urine","value":"yellow_urine"},
 {"label":"Yellowing Of Eyes","value":"yellowing_of_eyes"},
 {"label":"Acute Liver Failure","value":"acute_liver_failure"},
-{"label":"Fluid Overload","value":"fluid_overload"},
 {"label":"Swelling Of Stomach","value":"swelling_of_stomach"},
 {"label":"Swelled Lymph Nodes","value":"swelled_lymph_nodes"},
 {"label":"Malaise","value":"malaise"},

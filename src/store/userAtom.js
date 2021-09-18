@@ -1,8 +1,5 @@
 import { atom } from 'recoil';
-
-const defaultUserData = {
-    authToken: localStorage.getItem('authToken')
-}
+import { defaultUserData } from '../constants';
 
 const userAtom = atom({
     key: 'UserData',
