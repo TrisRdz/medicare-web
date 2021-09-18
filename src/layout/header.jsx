@@ -27,8 +27,6 @@ const Header = () => {
         history.replace('/');
     }
 
-    console.log(authToken, 'sadhksahdhaskdhashdashhd');
-
     return (
         <header className='headerContainer'>
             <h1 className='headerText' onClick={() => history.push('/')}>Medicare</h1>

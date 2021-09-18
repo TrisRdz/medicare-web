@@ -50,6 +50,13 @@ function HomePage() {
       url: 'user/appointment',
       withAuth: true
     })
+    if (response.status === 200) {
+      alert('Appointment created. Please check appointments page for more information');
+    } else if (response.data.detail === 'NO_DOCTOR_AVAILABLE') {
+      alert('Sorry there are no doctors currently available for treating this disease');
+    } else if (response.data.detail === 'User already has an Appointment') {
+      alert('You have already scheduled an appointment');
+    }
   }
 
   const shouldItemRender = (item, value) => {
@@ -130,10 +137,10 @@ function HomePage() {
         ADD +
       </button>}
       <button onClick={fetchPrediction} className='primaryButton' disabled={isInvalidInput}>Submit</button>
-      {!!predicted_disease && <p>
-        You might be having: <span style={{ fontWeight: 'bold', textTransform: 'capitalize' }}>{predicted_disease}</span>
+      {!!predicted_disease && <div>
+        <p>You might be having: <span style={{ fontWeight: 'bold', textTransform: 'capitalize' }}>{predicted_disease}</span></p>
         {authToken && required_doctor && <p>Would you like to setup an appointment with a doctor, if yes please click <span className='textButton' onClick={setAppointment}>here</span>.</p>}
-      </p>}
+      </div>}
     </div>
   );
 }
