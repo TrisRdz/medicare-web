@@ -82,6 +82,7 @@ const LoginPage = () => {
                     placeholder='Enter password'
                     label='Password'
                     onChange={(event) => setPassword(event.target.value)}
+                    type='password'
                 />
                 {Boolean(error) && <p className='errorMessage'>{error}</p>}
                 <div style={{ margin: '20px 0', fontSize: 14 }}>
