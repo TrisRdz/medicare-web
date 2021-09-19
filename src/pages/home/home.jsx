@@ -37,7 +37,8 @@ function HomePage() {
   const [prediction, setPrediction] = useState(null);
   const [error, setError] = useState('');
   const { userData } = useUserData();
-  const { role } = userData || {};
+  const { user } = userData || {};
+  const { role } = user || {};
   const { authToken } = useRecoilValue(userAtom);
 
   const resetValues = () => {
@@ -88,6 +89,8 @@ function HomePage() {
       return selectedCopy;
     })
   }
+
+  console.log(role, userData);
 
   const checkIsInvalidInput = () => {
     const nonEmptySymptoms = removeEmpty(selectedSymptoms);
