@@ -8,7 +8,8 @@ const Header = () => {
 
     const history = useHistory();
     const { userData, updateUserData, setUserData } = useUserData();
-    const { authToken } = userData || {};
+    const { authToken, user } = userData || {};
+    const { role } = user || {};
 
     const isLoggedIn = Boolean(authToken);
 
@@ -34,7 +35,7 @@ const Header = () => {
                 {isLoggedIn ?
                     <div>
                         <button className='headerButton' onClick={() => history.push('/profile')}>
-                            Appointments
+                            {role === 'admin' ? 'Add Doctor' : 'Appointments'}
                         </button>
                         <button className='headerButton' onClick={signOut}>
                             Sign Out

@@ -2,7 +2,7 @@ import apiCall from "./api";
 
 export const getUserDetails = async () => {
     const response = await apiCall({
-        method: 'POST',
+        method: 'GET',
         url: '/me',
         withAuth: true
     });

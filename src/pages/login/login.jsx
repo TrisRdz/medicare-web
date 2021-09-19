@@ -7,6 +7,7 @@ import '../../App.css'
 import apiCall from "../../utils/api";
 import { useSetRecoilState } from "recoil";
 import userAtom from "../../store/userAtom";
+import { useUserData } from "../../store/useUserData";
 
 const LoginPage = () => {
 
@@ -15,6 +16,7 @@ const LoginPage = () => {
     const [error, setError] = useState('');
     const setUserAtom = useSetRecoilState(userAtom);
     const history = useHistory();
+    const { updateUserData } = useUserData();
 
     useEffect(() => {
         setError('');
@@ -40,7 +42,7 @@ const LoginPage = () => {
             data: formData,
             url: 'token'
         });
-        if (response.status === 401) {
+        if (response && response.status === 401) {
             setError(response.data.detail);
         }
         const authToken = response && response.data && response.data.access_token;
@@ -49,6 +51,7 @@ const LoginPage = () => {
                 authToken
             });
             localStorage.setItem('authToken', authToken);
+            await updateUserData();
             history.replace('/profile');
         }
     }

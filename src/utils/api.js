@@ -24,6 +24,8 @@ const apiCall = async (params) => {
     } catch (error) {
         if (error && error.response && error.response.status === 401) {
             localStorage.removeItem('authToken');
+        } else if (!error.response) {
+            alert('Something went wrong');
         }
         return error.response;
     }

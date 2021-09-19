@@ -5,7 +5,9 @@ import userAtom from "../../store/userAtom";
 import apiCall from "../../utils/api";
 import { parseAPIResponseSymptoms } from '../../utils/formatter';
 import { symptoms as allSymptoms } from '../../constants/symptoms';
+import RegisterPage from "../register/register";
 
+import '../../App.css';
 import './profile.css';
 import { useUserData } from "../../store/useUserData";
 
@@ -18,7 +20,7 @@ const AppointmentField = ({ label, value }) => (
 
 const UserPage = () => {
 
-    const [user, setUser] = useRecoilState(userAtom);
+    const [user] = useRecoilState(userAtom);
     const [appointments, setAppointments] = useState(null);
     const { updateUserData, userData } = useUserData();
     const { role, appointment } = userData.user || {};
@@ -36,6 +38,21 @@ const UserPage = () => {
                 return { ...appointment, symptoms: formattedSymptoms };
             })
             setAppointments(formattedResponse);
+        }
+    }
+
+    const removeAppointment = async () => {
+        const response = await apiCall({
+            method: 'POST',
+            url: 'appointment/delete',
+            withAuth: true,
+            data: {
+                id: appointment.appointment_id
+            }
+        });
+        if (response && response.status === 200) {
+            alert('Appointment deleted successfully');
+            updateUserData();
         }
     }
 
@@ -82,18 +99,28 @@ const UserPage = () => {
                 <h2>Requested Appointment</h2>
                 {!appointment && <p>Currently you have no appointment scheduled</p>}
                 {appointment && <div className='appointmentCard'>
-                    <AppointmentField label="Doctor's Name" value={appointment.doctor_id} />
+                    <AppointmentField label="Doctor's Name" value={appointment.doctor_name} />
                     <AppointmentField label='Predicted Disease' value={appointment.predicted_disease} />
                     <AppointmentField label='Symptoms' value={symptomsString} />
+                    <button className='primaryButton' onClick={removeAppointment}>Remove</button>
                 </div>}
             </>
         )
     }
 
+    const adminUI = (
+        <>
+            <h2>Add Doctor</h2>
+            <p>Please enter details of the doctor you wish to add</p>
+            <RegisterPage submitButtonLabel='Add Doctor' />
+        </>
+    );
+
     return (
         <div>
             {role === 'doctor' && doctorsUI}
             {role === 'user' && userUI()}
+            {role === 'admin' && adminUI}
         </div>
     )
 

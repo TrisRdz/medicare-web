@@ -39,22 +39,23 @@ function HomePage() {
 
   const resetValues = () => {
     setSelectedSymptoms(Array(selectedSymptoms.length).fill(defaultSelectedSymptom));
+    setPrediction(null);
   }
 
   const { perceived_symptoms, required_doctor, predicted_disease } = prediction || {};
 
   const setAppointment = async () => {
     const response = await apiCall({
-      method: 'PUT',
+      method: 'POST',
       data: {
         perceived_symptoms,
         required_doctor,
         predicted_disease
       },
-      url: 'user/appointment',
+      url: 'appointment/add',
       withAuth: true
     })
-    if (response.status === 200) {
+    if (response && response.status === 200) {
       alert('Appointment created. Please check appointments page for more information');
     } else if (response.data.detail === 'NO_DOCTOR_AVAILABLE') {
       alert('Sorry there are no doctors currently available for treating this disease');
