@@ -35,8 +35,8 @@ const LoginPage = () => {
 
     const login = async () => {
         const formData = new FormData();
-        formData.append('username', email);
-        formData.append('password', password);
+        formData.append('username', email.trim());
+        formData.append('password', password.trim());
         const response = await apiCall({
             method: 'POST',
             data: formData,

@@ -31,9 +31,9 @@ const RegisterPage = ({ submitButtonLabel = 'Register' }) => {
             method: 'POST',
             data: {
                 id: "0",
-                name,
-                email,
-                password,
+                name: name.trim(),
+                email: email.trim(),
+                password: password.trim(),
                 ...(!isDefault ? { specialization } : {})
             },
             url: isDefault ? 'signup' : 'admin/add_doctor',

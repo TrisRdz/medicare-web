@@ -97,7 +97,7 @@ const UserPage = () => {
         }
         return (
             <>
-                <h2>Requested Appointment</h2>
+                <h2>Appointments</h2>
                 {!appointment && <p>Currently you have no appointment scheduled</p>}
                 {appointment && <div className='appointmentCard'>
                     <AppointmentField label="Doctor's Name" value={appointment.doctor_name} />
