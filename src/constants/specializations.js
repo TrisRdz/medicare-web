@@ -13,7 +13,7 @@ export const specializations = [
     },
     {
         label: 'ENT specialist',
-        value: 'ENT_specialist'
+        value: 'ENT specialist'
     },
 
     {
@@ -26,7 +26,7 @@ export const specializations = [
     },
     {
         label: 'Allergist/Immunologist',
-        value: 'Allergist_Immunologist'
+        value: 'Allergist/Immunologist'
     },
     {
         label: 'Urologist',
