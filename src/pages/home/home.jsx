@@ -37,6 +37,10 @@ function HomePage() {
   const [error, setError] = useState('');
   const { authToken } = useRecoilValue(userAtom);
 
+  const resetValues = () => {
+    setSelectedSymptoms(Array(selectedSymptoms.length).fill(defaultSelectedSymptom));
+  }
+
   const { perceived_symptoms, required_doctor, predicted_disease } = prediction || {};
 
   const setAppointment = async () => {
@@ -130,6 +134,7 @@ function HomePage() {
           </div>
         ))}
       </div>
+      <p className='textButton' onClick={resetValues}>Reset all values</p>
       {!!error && <p style={{ color: 'red' }}>
           {error}
         </p>}
