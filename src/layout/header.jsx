@@ -38,11 +38,11 @@ const Header = () => {
                             {role === 'admin' ? 'Add Doctor' : 'Appointments'}
                         </button>
                         <button className='headerButton' onClick={signOut}>
-                            Sign Out
+                            Log Out
                         </button>
                     </div>
                     :
-                    <button className='headerButton' onClick={() => history.push('/login')}>Sign In</button>}
+                    <button className='headerButton' onClick={() => history.push('/login')}>Log In</button>}
             </div>
         </header>
     )

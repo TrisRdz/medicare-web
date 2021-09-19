@@ -77,7 +77,7 @@ const UserPage = () => {
                 let symptomsString = appointment.symptoms.map((symptom) => allSymptoms.find((symptomInAllSymptoms) => symptomInAllSymptoms.value === symptom).label);
                 symptomsString = symptomsString.join(', ');
                 return (
-                    <div className='appointmentCard'>
+                    <div className='appointmentCard' key={appointment.appointment_id}>
                         <AppointmentField label="Patient's Name" value={appointment.patient_name} />
                         <AppointmentField label='Predicted Disease' value={appointment.predicted_disease} />
                         <AppointmentField label='Symptoms' value={symptomsString} />
