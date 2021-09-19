@@ -73,6 +73,7 @@ const UserPage = () => {
     const doctorsUI = (
         <>
             {appointments && <h2>Appointments</h2>}
+            {appointments && appointments.length === 0 && <p>You currently have no appointment requests</p>}
             {appointments && appointments.map((appointment) => {
                 let symptomsString = appointment.symptoms.map((symptom) => allSymptoms.find((symptomInAllSymptoms) => symptomInAllSymptoms.value === symptom).label);
                 symptomsString = symptomsString.join(', ');

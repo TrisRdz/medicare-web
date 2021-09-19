@@ -8,6 +8,7 @@ import '../../components/input/inputStyles.css';
 import './homeStyles.css';
 import userAtom from '../../store/userAtom';
 import { useRecoilValue } from 'recoil';
+import { useUserData } from '../../store/useUserData';
 
 
 const removeEmpty = (selectedSymptoms) => {
@@ -35,6 +36,8 @@ function HomePage() {
   const [selectedSymptoms, setSelectedSymptoms] = useState(Array(5).fill(defaultSelectedSymptom));
   const [prediction, setPrediction] = useState(null);
   const [error, setError] = useState('');
+  const { userData } = useUserData();
+  const { role } = userData || {};
   const { authToken } = useRecoilValue(userAtom);
 
   const resetValues = () => {
@@ -145,7 +148,7 @@ function HomePage() {
       <button onClick={fetchPrediction} className='primaryButton' disabled={isInvalidInput}>Submit</button>
       {!!predicted_disease && <div>
         <p>You might be having: <span style={{ fontWeight: 'bold', textTransform: 'capitalize' }}>{predicted_disease}</span></p>
-        {authToken && required_doctor && <p>Would you like to setup an appointment with a doctor, if yes please click <span className='textButton' onClick={setAppointment}>here</span>.</p>}
+        {authToken && required_doctor && role === 'user' && <p>Would you like to setup an appointment with a doctor, if yes please click <span className='textButton' onClick={setAppointment}>here</span>.</p>}
       </div>}
     </div>
   );
